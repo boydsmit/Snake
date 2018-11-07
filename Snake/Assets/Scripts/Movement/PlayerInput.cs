@@ -10,7 +10,6 @@ public class PlayerInput : MonoBehaviour {
 
 	public Dir CurDir;
 	
-	// Update is called once per frame
 	void Update () 
 	{
 		GetKey();
