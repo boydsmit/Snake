@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class RandomSpawning : MonoBehaviour
 {
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [SerializeField] private GameObject _food;
+
+    private int _randx;
+    private int _randy;
+    private DrawGrid _grid;
+
+    private void Start()
+    {
+        _grid = GetComponent<DrawGrid>();
+        GenerateXY();
+        Spawn();
+    }
+
+    private void Spawn()
+    {
+        _grid.Grid[_randx, _randy] = Instantiate(_food, new Vector2(_randx, _randy), Quaternion.identity);
+    }
+    
+    private void GenerateXY()
+    {
+        _randx = Random.Range(0, 10);
+        _randy = Random.Range(0, 10);
+    }
 }

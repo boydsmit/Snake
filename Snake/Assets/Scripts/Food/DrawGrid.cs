@@ -3,16 +3,23 @@
 public class DrawGrid : MonoBehaviour
 {
 
-    [SerializeField] private int _gridSize;
-    private GameObject[,] _grid;
+    public int GridSize;
+    public GameObject[,] Grid;
+    
+
+    private void Start()
+    {
+        Grid = new GameObject[GridSize,GridSize];
+        Draw();
+    }
 
     private void Draw()
     {
-        for (int i = 0; i < _gridSize; i++)
+        for (int i = 0; i < GridSize; i++)
         {
-            for (int j = 0; j < _gridSize; j++)
+            for (int j = 0; j < GridSize; j++)
             {
-                _grid[i, j] = gameObject;
+                Grid[i, j] = gameObject;
             }
             
         }    
