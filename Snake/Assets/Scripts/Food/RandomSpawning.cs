@@ -13,6 +13,12 @@ public class RandomSpawning : MonoBehaviour
     private void Start()
     {
         _grid = GetComponent<DrawGrid>();
+        SpawnRandom();
+    
+    }
+
+    public void SpawnRandom()
+    {
         GenerateXY();
         Spawn();
     }
@@ -24,7 +30,8 @@ public class RandomSpawning : MonoBehaviour
     
     private void GenerateXY()
     {
-        _randx = Random.Range(0, 10);
-        _randy = Random.Range(0, 10);
+        _randx = Random.Range(0, _grid.GridSize);
+        _randy = Random.Range(0, _grid.GridSize);
     }
 }
+    
