@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class PlayerMove : MonoBehaviour
 {
 
 	[SerializeField] private int _initialMoveSpd;
-	private int _curMoveSpd;
+	public int CurMoveSpd;
 	private Rigidbody _rb;
 
 	private PlayerInput _input;
@@ -16,7 +17,7 @@ public class PlayerMove : MonoBehaviour
 	void Start ()
 	{
 		_rb = gameObject.GetComponent<Rigidbody>();
-		_curMoveSpd = _initialMoveSpd;
+		CurMoveSpd = _initialMoveSpd;
 		_input = gameObject.GetComponent<PlayerInput>();
 	}
 	
@@ -28,7 +29,7 @@ public class PlayerMove : MonoBehaviour
 
 	void Move(float x, float y)
 	{
-		_rb.velocity = new Vector2(x, y).normalized * _curMoveSpd * Time.deltaTime;
+		_rb.velocity = new Vector2(x, y).normalized * CurMoveSpd * Time.deltaTime;
 	}
 
 	void GetDir()
