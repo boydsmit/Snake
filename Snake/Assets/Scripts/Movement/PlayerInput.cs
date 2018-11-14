@@ -6,9 +6,11 @@ using UnityEngine.WSA;
 
 public class PlayerInput : MonoBehaviour {
 
-	public enum Dir  {Left,Right,Up,Down}
+	public enum Dir  {None,Left,Right,Up,Down}
 
 	public Dir CurDir;
+	public Dir PrevDir;
+	public Dir Buffer;
 	
 	void Update () 
 	{
@@ -17,26 +19,50 @@ public class PlayerInput : MonoBehaviour {
 
 	void GetKey()
 	{
-		if(Input.GetKey(KeyCode.A))
+		if(Input.GetKeyDown(KeyCode.A))
 		{
 			CurDir = Dir.Left;
+			BufferKey();
 		}
 
-		if (Input.GetKey(KeyCode.W))
+		if (Input.GetKeyDown(KeyCode.W))
 		{
+			
 			CurDir = Dir.Up;
+			BufferKey();
 		}
 
-		if (Input.GetKey(KeyCode.D))
+		if (Input.GetKeyDown(KeyCode.D))
 		{
 			CurDir = Dir.Right;
+			BufferKey();
 		}
 
-		if (Input.GetKey(KeyCode.S))
+		if (Input.GetKeyDown(KeyCode.S))
 		{
 			CurDir = Dir.Down;
+			BufferKey();
 		}
 	}
 
-	
+	private bool CheckEmpty(Dir var)
+	{
+		if (var == Dir.None) return true;
+
+		return false;
+	}
+
+	private void BufferKey()
+	{
+		if (CheckEmpty(PrevDir))
+		{
+			PrevDir = CurDir;
+			Buffer = PrevDir;
+		}
+		else
+		{
+			PrevDir = Buffer;
+			Buffer = CurDir;
+		}
+	}
 }
